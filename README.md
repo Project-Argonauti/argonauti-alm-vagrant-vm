@@ -1,5 +1,7 @@
 # Argonauti ALM local Virtual Machine
 
+**WORK IN PROGRESS**
+
 The following repository describes the provisioning of a Virtual Machine to Application Lifecycle Managements purposes.
 
 Since we do not have enough resources, the aim is to standardise the CI/CD and other operations processes for Project Argonauti.
@@ -42,7 +44,7 @@ If no command is provided, the script defaults to `start`.
 - Ensure your SSH client is properly configured (see [ssh_config manual](https://linux.die.net/man/5/ssh_config))
 - When dedicated resources are available
 
---
+---
 
 ### Contributing
 

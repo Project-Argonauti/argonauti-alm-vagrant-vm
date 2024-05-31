@@ -18,17 +18,5 @@ Vagrant.configure("2") do |config|
       vb.memory = "4096"
       vb.cpus = "2"
     end
-
-    #box.vm.provision "ansible_local" do |ansible|
-    #    #ansible.compatibility_mode = "auto"
-    #    ansible.become = true
-    #    ansible.verbose = "v"
-    #    ansible.playbook = "./playbook_vagrant_test.yml"
-    #    #ansible.raw_arguments  = "--ask-vault-pass"
-    #    ansible.extra_vars = {
-    #      ansible_python_interpreter: "/usr/bin/python3"
-    #      #ansible_roles_path: "/vagrant/ansible-roles"
-    #    }
-    #end
   end
 end
