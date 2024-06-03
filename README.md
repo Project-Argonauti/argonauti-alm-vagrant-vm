@@ -17,7 +17,7 @@ This will be until dedicated resources are available to centralize the processes
 - VirtualBox installed
 - Access to Project Argonauti's Git repositories
 - Bash environment (Linux, MacOS, or Windows with Git Bash)
-- Availability of 2vCPUS, 4GB RAM and 50GB Storage
+- Availability of 4vCPUS, 8GB RAM and 50GB Storage
 
 ### Usage
 

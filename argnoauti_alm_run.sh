@@ -6,10 +6,9 @@ ALM_VM_NAME="argonauti.alm"
 ALM_WORK_PATH=$PWD
 ALM_GIT_REPOSITORIES=( 
     "git@github.com:Project-Argonauti/ansible-jenkins.git"
-    "git@github.com:Project-Argonauti/jenkins-pipelines.git"
 )
 
-ALM_ANSIBLE_ROLE_PATH=/c/WORKSPACE/cottage_github/project-argonauti/alm-vm-local/roles
+ALM_ANSIBLE_ROLE_PATH="/e/project-argonauti/argonauti-alm-vagrant-vm/roles"
 
 log() {
     echo "[$(date --utc) - $1]: $2"
@@ -29,7 +28,7 @@ cloner () {
     local url=$1
     local output_path=$(basename $url | cut -d '.' -f 1)
     
-    if [ ! -d "${$output_path}" ]
+    if [ ! -d "${output_path}" ]
     then
         log "INFO" "Now cloning $url ..."
         git clone $url  || {
@@ -61,12 +60,12 @@ handle_start() {
 
 handle_stop() {
     log "INFO" "Stopping the VM $ALM_VM_NAME"
-    vagrant destroy -f "$ALM_VM_NAME"
+    vagrant halt -f "$ALM_VM_NAME"
 }
 
 handle_destroy() {
     log "WARN" "Destroying the VM $ALM_VM_NAME"
-    vagrant halt -f "$ALM_VM_NAME"
+    vagrant destroy -f "$ALM_VM_NAME"
 }
 
 if [ ! -d "${ALM_ANSIBLE_ROLE_PATH}" ];
@@ -74,7 +73,7 @@ then
     log "INFO" "Creating ansible role path in $ALM_ANSIBLE_ROLE_PATH ..."
     mkdir -p $ALM_ANSIBLE_ROLE_PATH
     cd $ALM_ANSIBLE_ROLE_PATH
-    for repo in ${myArray[@]}; do
+    for repo in ${ALM_GIT_REPOSITORIES[@]}; do
         cloner $repo
     done
     cd $ALM_WORK_PATH
