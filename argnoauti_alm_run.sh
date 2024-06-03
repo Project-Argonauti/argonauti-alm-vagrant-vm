@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-pull_method=false
+pull_method=true
 
 ALM_VM_NAME="argonauti.alm"
 ALM_WORK_PATH=$PWD
@@ -16,6 +16,8 @@ log() {
 
 puller () {
     local path=$1
+
+    log "INFO" "Pulling new commits from $path ..."
     cd $path
     git remote -v
     git stash
@@ -44,6 +46,7 @@ cloner () {
 }
 
 is_vm_running() {
+    log "INFO" "Check $ALM_VM_NAME if is running ..."
     vagrant status "$ALM_VM_NAME" | grep -q 'running'
     return $?
 }
@@ -68,16 +71,22 @@ handle_destroy() {
     vagrant destroy -f "$ALM_VM_NAME"
 }
 
-if [ ! -d "${ALM_ANSIBLE_ROLE_PATH}" ];
+if [ -z $VAGRANT_DEFAULT_PROVIDER ]
+then
+    export VAGRANT_DEFAULT_PROVIDER="virtualbox"
+fi
+
+if [ ! -d "${ALM_ANSIBLE_ROLE_PATH}" ]
 then
     log "INFO" "Creating ansible role path in $ALM_ANSIBLE_ROLE_PATH ..."
     mkdir -p $ALM_ANSIBLE_ROLE_PATH
-    cd $ALM_ANSIBLE_ROLE_PATH
-    for repo in ${ALM_GIT_REPOSITORIES[@]}; do
-        cloner $repo
-    done
-    cd $ALM_WORK_PATH
 fi
+
+cd $ALM_ANSIBLE_ROLE_PATH
+for repo in ${ALM_GIT_REPOSITORIES[@]}; do
+    cloner $repo
+done
+cd $ALM_WORK_PATH
 
 case "$1" in
     start)

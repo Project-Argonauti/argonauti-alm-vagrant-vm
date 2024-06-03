@@ -15,6 +15,7 @@ This will be until dedicated resources are available to centralize the processes
 - Git-Client installed
 - Vagrant installed
 - VirtualBox installed
+- Windows Hyper-v enabled (to use Hyper-v instead VBox)
 - Access to Project Argonauti's Git repositories
 - Bash environment (Linux, MacOS, or Windows with Git Bash)
 - Availability of 4vCPUS, 8GB RAM and 50GB Storage
@@ -34,6 +35,13 @@ Where `[command]` can be:
 
 If no command is provided, the script defaults to `start`.
 
+To use another provider, set as system var `VAGRANT_DEFAULT_PROVIDER` [(by default is set to `virtualbox`)](./argnoauti_alm_run.sh).
+
+At the moment this vagrant project is ready only for `virtualbox` (work in progress on `hyperv`)
+
+For more details, see [official documentation](https://developer.hashicorp.com/vagrant/docs/providers/basic_usage#default-provider)
+
+
 ---
 
 ### Important Notes
@@ -42,7 +50,8 @@ If no command is provided, the script defaults to `start`.
 - The script should be run from a directory where it has permissions to create directories and write files, as it may need to clone repositories and create directories.
 - Ensure your SSH keys are set up correctly for accessing private repositories on GitHub.
 - Ensure your SSH client is properly configured (see [ssh_config manual](https://linux.die.net/man/5/ssh_config))
-- When dedicated resources are available
+- When dedicated resources are available, this project will archive.
+- For hyper-v/vagrant integration, see requirements in [vagrant documentation](https://developer.hashicorp.com/vagrant/docs/providers/hyperv)
 
 ---
 

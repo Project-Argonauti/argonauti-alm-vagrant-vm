@@ -3,7 +3,9 @@
 
 SSL_STATUS = true
 box_name = "ubuntu/jammy64"
+#box_name = "generic/ubuntu2204" # for hyper-v
 hostname = "argonauti.alm"
+local_ip = "192.168.23.42"
 
 Vagrant.configure("2") do |config|
   config.vm.define "#{hostname}" do |box|
@@ -12,7 +14,12 @@ Vagrant.configure("2") do |config|
     box.vm.box_download_options = {"ssl-no-revoke" => SSL_STATUS}
     box.vm.hostname = "#{hostname}"
 
-    box.vm.network "private_network", ip: "192.168.23.42"
+    box.vm.network "private_network", ip: "#{local_ip}"
+
+    #box.vm.provider "hyperv" do |hv|
+    #  hv.memory = "8192"
+    #  hv.cpus = "4"
+    #end
 
     box.vm.provider "virtualbox" do |vb|
       vb.memory = "8192"
